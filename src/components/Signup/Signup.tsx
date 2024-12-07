@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Toast from "../Toast/Toast";
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
-import { SignupSchema } from "../../validationSchema";
+import { SignupSchema } from "../../schema/validationSchema";
+import StrengthIndicator from "../StrengthIndicator/StrengthIndicator";
+import { evaluatePasswordStrength } from "../../utils/evaluate";
 
 // Toggle between forms
 interface SignupProps {
@@ -57,7 +59,7 @@ export default function Signup({ toggleForm }: SignupProps) {
             }
           }}
         >
-          {({ isSubmitting, errors, touched }) => (
+          {({ isSubmitting, errors, touched, values }) => (
             <Form className="flex flex-col gap-2 items-center justify-center p-4 bg-white rounded-2xl shadow-lg w-full">
               <Field
                 name="firstName"
@@ -115,6 +117,11 @@ export default function Signup({ toggleForm }: SignupProps) {
                 }`}
               />
 
+              {values.password && !errors.password && (
+                <StrengthIndicator
+                  strength={evaluatePasswordStrength(values.password)}
+                />
+              )}
               <div className="text-red-500 w-full text-center">
                 <ErrorMessage name="password" />
               </div>
@@ -135,8 +142,8 @@ export default function Signup({ toggleForm }: SignupProps) {
               </div>
               <button
                 type="submit"
-                className={`bg-blue-500 rounded px-4 py-2 text-white font-bold w-2/3 my-4 
-                  ${isSubmitting && "bg-blue-300"}`}
+                className={`rounded px-4 py-2 text-white font-bold w-2/3 my-4 
+                  ${isSubmitting ? "bg-blue-300" : "bg-blue-500"}`}
                 disabled={isSubmitting}
               >
                 Sign Up

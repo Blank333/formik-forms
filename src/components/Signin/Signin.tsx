@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
-import { SigninSchema } from "../../validationSchema";
+import { SigninSchema } from "../../schema/validationSchema";
 import { useState } from "react";
 import Toast from "../Toast/Toast";
 
@@ -99,8 +99,8 @@ export default function Signin({ toggleForm }: SigninProps) {
 
               <button
                 type="submit"
-                className={`bg-blue-500 rounded px-4 py-2 text-white font-bold w-2/3 my-4 
-                ${isSubmitting && "bg-blue-300"}`}
+                className={`rounded px-4 py-2 text-white font-bold w-2/3 my-4 
+                ${isSubmitting ? "bg-blue-300" : "bg-blue-500 "}`}
                 disabled={isSubmitting}
               >
                 Login
@@ -114,7 +114,7 @@ export default function Signin({ toggleForm }: SigninProps) {
           onClick={toggleForm}
           className="text-blue-600"
         >
-          Already have an account?
+          Create an account
         </button>
       </div>
 
