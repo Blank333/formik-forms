@@ -136,7 +136,7 @@ export default function Signup({ toggleForm }: SignupProps) {
               <button
                 type="submit"
                 className={`bg-blue-500 rounded px-4 py-2 text-white font-bold w-2/3 my-4 
-                  ${isSubmitting && "bg-blue-200"}`}
+                  ${isSubmitting && "bg-blue-300"}`}
                 disabled={isSubmitting}
               >
                 Sign Up

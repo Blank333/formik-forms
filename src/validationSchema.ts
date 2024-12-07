@@ -21,3 +21,11 @@ export const SignupSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Password does not match")
     .required("Required"),
 });
+
+export const SigninSchema = Yup.object().shape({
+  email: Yup.string().email("Please enter correct email").required("Required"),
+
+  password: Yup.string()
+    .min(6, "Password needs to be atleast 6 characters")
+    .required("Required"),
+});
